@@ -1,8 +1,15 @@
 buildscript {
+    ext.kotlin_version = '1.1.3-2'
     apply from: "$rootProject.projectDir/gradle/buildscript.gradle", to: buildscript
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }
 
-description = "Example - App Core"
+description = "Jose Gradle Kotlin Demo - App Core"
 defaultTasks = ['aemAppCoreDeploy']
 
 apply plugin: 'java'
@@ -11,7 +18,7 @@ apply plugin: 'org.dm.bundle'
 apply plugin: 'com.cognifide.aem'
 
 bundle {
-    def pkg = 'com.company.aem.example.core'
+    def pkg = 'com.jose.core'
 
     instruction 'Bundle-SymbolicName', pkg
     instruction 'Sling-Model-Packages', pkg
@@ -20,4 +27,19 @@ bundle {
 
 dependencies {
     compile project(':app:common')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    testCompile "org.mockito:mockito-core:1.+"
+}
+repositories {
+    mavenCentral()
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }

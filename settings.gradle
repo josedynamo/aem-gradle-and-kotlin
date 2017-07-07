@@ -1,4 +1,4 @@
-rootProject.name = 'example'
+rootProject.name = "jose"
 
 include 'app'
 include 'app:common'
